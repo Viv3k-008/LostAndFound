@@ -1,0 +1,45 @@
+.found-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.found-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color 0.15s ease, transform 0.1s ease;
+  display: block;
+}
+
+.found-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.found-thumb {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  background: var(--surface-raised);
+}
+
+.found-body {
+  padding: 14px 16px 16px;
+}
+
+.found-location {
+  margin: 10px 0 2px;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.found-date {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
