@@ -36,7 +36,7 @@ const createLostItem = async (req, res) => {
         await sendEmail(
           req.user.email,
           "Possible match found for your lost item",
-          `We found ${matches.length} possible match(es) for your lost ${category}. Log in to view and claim them.`
+          `We found ${matches.length} possible match for your lost ${category}. Log in to view and claim them.`
         );
       } catch (emailError) {
         console.error("Match notification email failed:", emailError);

@@ -20,7 +20,7 @@ function daysBetween(dateA, dateB) {
 }
 
 /**
- * Combined weighted score (0-100) for how likely a LostItem and FoundItem
+ * Combined weighted score (0-400) for how likely a LostItem and FoundItem
  * refer to the same physical item.
  * Category is a hard filter: different categories can never match.
  */
@@ -29,21 +29,23 @@ function calculateMatchScore(lostItem, foundItem) {
     return 0;
   }
 
-  let score = 40; // category match is the strongest single signal
+  let score = 100; // category match is the strongest single signal
 
-  if (lostItem.location.trim().toLowerCase() === foundItem.location.trim().toLowerCase()) {
-    score += 20;
-  }
+  let locationScore = calculateSimilarity(lostItem.location, foundItem.location);
+  locationScore *= 100; // scale to 0-100 for weighting
+  score += locationScore;
 
   const days = daysBetween(lostItem.dateLost, foundItem.dateFound);
-  if (days <= 3) score += 20;
-  else if (days <= 14) score += 10;
-  else if (days <= 30) score += 5;
+  if (days <= 3) score += 100;
+  else if (days <= 14) score += 40;
+  else if (days <= 30) score += 20;
 
-  const textScore = calculateSimilarity(lostItem.description, foundItem.description);
-  score += textScore * 20;
+  let descriptionScore = calculateSimilarity(lostItem.description, foundItem.description);
+  descriptionScore *= 100; // scale to 0-100 for weighting
+  score += descriptionScore;
 
-  return Math.round(score);
+  // final score out of 400, but we can return it as-is for threshold comparisons
+  return Math.round(score/4); // normalize to 0-100 for easier thresholding
 }
 
 /**
