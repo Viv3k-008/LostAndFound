@@ -44,8 +44,8 @@ function calculateMatchScore(lostItem, foundItem) {
   descriptionScore *= 100; // scale to 0-100 for weighting
   score += descriptionScore;
 
-  // final score out of 400, but we can return it as-is for threshold comparisons
-  return Math.round(score/4); // normalize to 0-100 for easier thresholding
+  // score = final score out of 400
+  return Math.round(score/4); // normalized to 0-100% for easier thresholding
 }
 
 /**
