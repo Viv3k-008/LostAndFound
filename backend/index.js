@@ -37,14 +37,16 @@ app.use("/api/lost-items", lostItemRoutes);
 app.use("/api/found-items", foundItemRoutes);
 app.use("/api/claims", claimRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+// Serve frontend in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  
   app.use((req, res) => {
-    res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
+    res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
   });
 } else {
-  app.get("/", (req, res) => {
-    res.send("Lost & Found API is running in development mode...");
+  app.get('/', (req, res) => {
+    res.send('ShopNest API is running in Development mode...');
   });
 }
 
